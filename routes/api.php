@@ -6,6 +6,14 @@ use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
+
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\OrderItemController;
+use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\CouponController;
+
+
+
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'show']);
@@ -36,6 +44,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/users', [UserController::class, 'store']);
     Route::put('/users/{id}', [UserController::class, 'update']);
     Route::delete('/users/{id}', [UserController::class, 'destroy']);
+
+    Route::apiResource('orders', OrderController::class);
+    Route::apiResource('order-items', OrderItemController::class);
+    Route::apiResource('payments', PaymentController::class);
+    Route::apiResource('coupons', CouponController::class);
 
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', [AuthController::class, 'userProfile']);
